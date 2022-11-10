@@ -14,7 +14,7 @@ const ShowServices = ({ service }) => {
                         <h1 className='text-2xl  my-2 font-semibold'>{name}</h1>
                         <small className='flex items-center text-orange-700 font-semibold mt-1 mr-2'><AiFillStar className='mr-1 text-orange-700' /> {rating}</small>
                     </div>
-                    <p>Detailes: {description.slice(0, 120)}...</p>
+                    <p>Detailes: {description.slice(0, 99)}...</p>
                 </div>
             </div>
             <Link to={`/showSingleServices/${_id}`}>

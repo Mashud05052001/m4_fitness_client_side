@@ -46,16 +46,19 @@ const Login = () => {
     const handleGoogle = () => {
         googleJoin().then(result => {
             console.log(result.user);
+            navigate(from, { replace: true });
         }).catch(error => console.log(error));
     }
     const handleFacebook = () => {
         facebookJoin().then(result => {
             console.log(result.user);
+            navigate(from, { replace: true });
         }).catch(error => console.log(error));
     }
     const handleGithub = () => {
         githubJoin().then(result => {
             console.log(result.user);
+            navigate(from, { replace: true });
         }).catch(error => console.log(error));
     }
 

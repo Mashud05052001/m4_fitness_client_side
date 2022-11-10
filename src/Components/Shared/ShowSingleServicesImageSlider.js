@@ -9,7 +9,6 @@ import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from 'react-icons/ai';
 const ShowSingleServicesImageSlider = ({ images }) => {
     const SamplePrevArrow = () => <div />
     const slideRef = useRef();
-    console.log(images);
     const settings = {
         dots: true,
         fade: true,
@@ -31,13 +30,36 @@ const ShowSingleServicesImageSlider = ({ images }) => {
             <Slider {...settings} ref={slideRef}>
                 {
                     images.map((image, index) => <div key={index}>
-                        <PhotoProvider>
-                            <PhotoView src={image.image}>
-                                <img src={image.image} alt="" className='w-full h-96 rounded-lg cursor-pointer' />
-                            </PhotoView>
-                        </PhotoProvider>
+                        <section>
+                            <PhotoProvider>
+                                <PhotoView src={images[0].image}>
+                                    <img src={image.image} alt="" className='w-full h-96 rounded-lg cursor-pointer' />
+                                </PhotoView>
+                            </PhotoProvider>
+                        </section>
                     </div>)
                 }
+                {/* <div >
+                    <PhotoProvider>
+                        <PhotoView src={images[0].image}>
+                            <img src={images[0].image} alt="" className='w-full h-96 rounded-lg cursor-pointer' />
+                        </PhotoView>
+                    </PhotoProvider>
+                </div>
+                <div >
+                    <PhotoProvider>
+                        <PhotoView src={images[1].image}>
+                            <img src={images[1].image} alt="" className='w-full h-96 rounded-lg cursor-pointer' />
+                        </PhotoView>
+                    </PhotoProvider>
+                </div>
+                <div >
+                    <PhotoProvider>
+                        <PhotoView src={images[2].image}>
+                            <img src={images[2].image} alt="" className='w-full h-96 rounded-lg cursor-pointer' />
+                        </PhotoView>
+                    </PhotoProvider>
+                </div> */}
 
             </Slider>
         </div>
