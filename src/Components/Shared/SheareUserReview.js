@@ -13,7 +13,7 @@ const SheareUserReview = ({ user, itemName, handleReview }) => {
                         </label>
                         <input type="text" defaultValue={user?.displayName} name='name' placeholder="name" className="input input-bordered" required />
                     </div>
-                    <p className=' text-center font-medium mt-5'>Service Name : {itemName} <hr className='border-2 mt-1  rounded-full border-gray-300 ' /> </p>
+                    <div className=' text-center font-medium mt-5'>Service Name : {itemName} <hr className='border-2 mt-1  rounded-full border-gray-300 ' /> </div>
 
                     <div className="form-control ">
                         <label className="label">

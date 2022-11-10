@@ -18,7 +18,8 @@ const ShowSingleServices = () => {
         const ratings = form.ratings.value;
         const review = form.review.value;
         const name = form.name.value;
-        const date = new Date().toJSON();
+        // const date = new Date().toJSON();
+        const date = new Date().toUTCString();
         const userReview = {
             email: user?.email,
             serviceID: _id,

@@ -18,7 +18,7 @@ const Header = () => {
             <Link to='/services'>Services</Link>
         </li>
         <li>
-            <Link to='/reviews'>Reviews</Link>
+            <Link to='/reviews'>My Reviews</Link>
         </li>
         {
             !user &&
@@ -59,15 +59,15 @@ const Header = () => {
                         {
                             showUser ?
                                 <div className='absolute z-10 duration-100 top-12 bg-gray-200 w-40 -right-[28px] py-4 pl-4 '>
-                                    <p className='py-2'><Link>My Reviews</Link></p>
-                                    <p className='py-2'><Link>Add Service</Link></p>
+                                    <p className='py-2'><Link to='/reviews' onClick={() => setShowUser(false)}>My Reviews</Link></p>
+                                    <p className='py-2'><Link to='/addServices' onClick={() => setShowUser(false)}>Add Service</Link></p>
                                     <p className='py-2'><Link onClick={handleLogout}>Logout</Link></p>
                                 </div>
                                 :
                                 <div className='absolute -z-10 duration-200  opacity-0 top-12  w-40 -right-[28px] py-4 pl-4 '>
-                                    <p className='py-2'><Link>My Reviews</Link></p>
-                                    <p className='py-2'><Link>Add Service</Link></p>
-                                    <p className='py-2'><Link onClick={handleLogout}>Logout</Link></p>
+                                    <div className='py-2' ><Link >My Reviews</Link></div>
+                                    <div className='py-2'><Link>Add Service</Link></div>
+                                    <div className='py-2'><Link onClick={handleLogout}>Logout</Link></div>
                                 </div>
 
                         }
