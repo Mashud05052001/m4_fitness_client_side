@@ -40,7 +40,7 @@ const Header = () => {
                 <Link to='/'>
                     <div className='flex items-center cursor-pointer'>
                         <img src={headerLogo} alt=".." className=' w-20' />
-                        <h1 className='text-2xl font-semibold font-[cursive] ml-1'><span className='text-[#570df8]'>M4</span> Fitness</h1>
+                        <h1 className='text-2xl font-semibold font-[cursive] ml-1'><span className='text-[#e39d2b]'>M4</span> Fitness</h1>
                     </div>
                 </Link>
 
@@ -58,13 +58,13 @@ const Header = () => {
                         <img src={user.photoURL} alt="" className='w-10 h-10 rounded-full' title={user?.displayName ? user?.displayName : "No Name Found"} onClick={() => setShowUser(!showUser)} />
                         {
                             showUser ?
-                                <div className='absolute z-10 duration-200 top-12 bg-gray-200 w-40 -right-5 py-4 pl-4 '>
+                                <div className='absolute z-10 duration-100 top-12 bg-gray-200 w-40 -right-[28px] py-4 pl-4 '>
                                     <p className='py-2'><Link>My Reviews</Link></p>
                                     <p className='py-2'><Link>Add Service</Link></p>
                                     <p className='py-2'><Link onClick={handleLogout}>Logout</Link></p>
                                 </div>
                                 :
-                                <div className='absolute -z-10 duration-200  opacity-0 top-12  w-40 -right-5 py-4 pl-4 '>
+                                <div className='absolute -z-10 duration-200  opacity-0 top-12  w-40 -right-[28px] py-4 pl-4 '>
                                     <p className='py-2'><Link>My Reviews</Link></p>
                                     <p className='py-2'><Link>Add Service</Link></p>
                                     <p className='py-2'><Link onClick={handleLogout}>Logout</Link></p>
