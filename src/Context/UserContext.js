@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../Firebase/firebase.init';
 
 
@@ -10,7 +10,7 @@ const UserContext = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
-    // const facebookProvider = new FacebookAuthProvider();
+    const facebookProvider = new FacebookAuthProvider();
 
 
     const register = (email, password) => {
@@ -29,10 +29,12 @@ const UserContext = ({ children }) => {
         setLoading(true);
         return signInWithPopup(auth, githubProvider);
     }
-    // const facebookJoin = () => {
-    //     setLoading(true);
-    //     return signInWithPopup(auth,facebookProvider);
-    // }
+    const facebookJoin = () => {
+        setLoading(true);
+        return signInWithPopup(auth, facebookProvider);
+    }
+    const updateUser = (profile) => updateProfile(auth.currentUser, profile);
+    const resetPassword = email => sendPasswordResetEmail(auth, email);
     const logOut = () => {
         return signOut(auth);
     }
@@ -53,7 +55,7 @@ const UserContext = ({ children }) => {
 
 
 
-    const sendItems = { user, setUser, loading, setLoading, register, login, googleJoin, githubJoin, logOut };
+    const sendItems = { user, setUser, loading, setLoading, register, login, facebookJoin, googleJoin, githubJoin, logOut, updateUser, resetPassword };
     return (
         <AuthContext.Provider value={sendItems}>
             {children}

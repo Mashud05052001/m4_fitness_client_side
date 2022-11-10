@@ -1,10 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../Context/UserContext';
 import './Header.Module.css';
 import headerLogo from '../Pictures/Logo/website_logo.png'
 const Header = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+    const [showUser, setShowUser] = useState(false);
+    const handleLogout = () => {
+        setShowUser(false);
+        logOut().then(() => { }).catch(err => console.log(err));
+    }
     const headerCenterItems = <>
         <li>
             <Link to='/home'>Home</Link>
@@ -16,10 +21,8 @@ const Header = () => {
             <Link to='/reviews'>Reviews</Link>
         </li>
         {
-            user ?
-                <li>   <Link>Logout</Link></li>
-                :
-                <li>  <Link to='/login'>Login</Link></li>
+            !user &&
+            <li>  <Link to='/login'>Login</Link></li>
 
         }
     </>
@@ -51,9 +54,25 @@ const Header = () => {
             <div className="navbar-end">
                 {
                     user &&
-                    <div>
-                        mahi
+                    <div className=' cursor-pointer mr-3 border-2 relative border-[#ffb946]/30 rounded-full p-0.5' >
+                        <img src={user.photoURL} alt="" className='w-10 h-10 rounded-full' title={user?.displayName ? user?.displayName : "No Name Found"} onClick={() => setShowUser(!showUser)} />
+                        {
+                            showUser ?
+                                <div className='absolute z-10 duration-200 top-12 bg-gray-200 w-40 -right-5 py-4 pl-4 '>
+                                    <p className='py-2'><Link>My Reviews</Link></p>
+                                    <p className='py-2'><Link>Add Service</Link></p>
+                                    <p className='py-2'><Link onClick={handleLogout}>Logout</Link></p>
+                                </div>
+                                :
+                                <div className='absolute -z-10 duration-200  opacity-0 top-12  w-40 -right-5 py-4 pl-4 '>
+                                    <p className='py-2'><Link>My Reviews</Link></p>
+                                    <p className='py-2'><Link>Add Service</Link></p>
+                                    <p className='py-2'><Link onClick={handleLogout}>Logout</Link></p>
+                                </div>
+
+                        }
                     </div>
+
                 }
             </div>
         </div>
