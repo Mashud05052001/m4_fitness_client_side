@@ -51,7 +51,7 @@ const ShowSingleServices = () => {
     }
     return (
         <div className='max-w-screen-xl mx-auto my-12 px-5 sm:px-8 md:px-16'>
-            <div className="hero bg-base-200">
+            <div className="hero">
                 <div className="flex items-center flex-col xl:flex-row">
                     <div className='w-80 sm:w-[600px] md:w-[630px] lg:w-[800px] xl:w-96'>
 

@@ -3,7 +3,7 @@ import React from 'react';
 const TrainerProfile = () => {
     return (
         <div className='max-w-screen-xl mx-auto my-12'>
-            <div className="hero  bg-base-200">
+            <div className="hero ">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <img src="https://i.ibb.co/BKYB59D/anastase-maragos-eh-Qimz6-1q-M-unsplash.jpg" className="w-96 h-[650px] rounded-lg shadow-2xl"
                         alt='' />
