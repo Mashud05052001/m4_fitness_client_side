@@ -1,7 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import useTitle from './Shared/useTitle';
 
 const AddServices = () => {
+    useTitle('Add Services')
     const navigate = useNavigate();
     const handleAddService = event => {
         event.preventDefault();

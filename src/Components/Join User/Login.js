@@ -7,8 +7,10 @@ import githubIcon from '../../Pictures/icons/loginregister/github.png';
 import googleIcon from '../../Pictures/icons/loginregister/google.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
+import useTitle from '../Shared/useTitle';
 
 const Login = () => {
+    useTitle("Login");
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
     const { login, facebookJoin, googleJoin, githubJoin, resetPassword } = useContext(AuthContext);

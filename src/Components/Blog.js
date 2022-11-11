@@ -1,6 +1,8 @@
 import React from 'react';
+import useTitle from './Shared/useTitle';
 
 const Blog = () => {
+    useTitle('Blog')
     return (
         <div className='max-w-screen-xl mx-auto mt-12 border-2 rounded-xl'>
             <div className="collapse collapse-arrow rounded-t-xl">

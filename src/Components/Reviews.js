@@ -4,8 +4,10 @@ import { AuthContext } from '../Context/UserContext';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import SheareUserReview from './Shared/SheareUserReview';
 import EditReviews from './EditReviews';
+import useTitle from './Shared/useTitle';
 
 const Reviews = () => {
+    useTitle(' User Reviews');
     const { user } = useContext(AuthContext);
     const [reviews, setReviews] = useState([]);
     const [edit, setEdit] = useState(false);
