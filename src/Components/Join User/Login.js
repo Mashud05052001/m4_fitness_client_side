@@ -23,8 +23,8 @@ const Login = () => {
         const password = form.password.value;
         login(email, password).then(result => {
             const user = result.user;
-            console.log(user);
             navigate(from, { replace: true });
+            form.reset();
         }).catch(error => {
             if (error.message === "Firebase: Error (auth/user-not-found).") {
                 setError("User not found with this email");

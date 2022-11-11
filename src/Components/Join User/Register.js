@@ -28,6 +28,7 @@ const Register = () => {
             updateUser(profile).then(() => { }).catch(err => console.log(err));
             alert('You have successfully register our website');
             <Navigate to='/' />
+            form.reset();
         }).catch(error => {
             if (error.message === "Firebase: Error (auth/user-not-found).") {
                 setError("User not found in firebase.");
