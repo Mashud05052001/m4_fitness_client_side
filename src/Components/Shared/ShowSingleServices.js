@@ -11,7 +11,7 @@ const ShowSingleServices = () => {
     const services = useLoaderData();
     const location = useLocation();
     const navigate = useNavigate();
-    const { description, images, name, rating, _id } = services;
+    const { description, images, name, rating, _id, price } = services;
     const handleReview = event => {
         event.preventDefault();
         const form = event.target;
@@ -64,6 +64,10 @@ const ShowSingleServices = () => {
                             <h1 className="text-2xl md:text-3xl lg:text-4xl text-[#e39d2b] font-bold">{name}</h1>
                             <small className='flex text-lg items-center  text-[#e39d2b] font-semibold mt-1 mr-2'><AiFillStar className='mr-1  text-[#e39d2b]' /> {rating}</small>
                         </div>
+                        <div className='flex mt-1 mr-2 float-right'>
+                            <span className='mt-[1px] font-medium'>Price : </span><small className='flex text-lg items-center  text-[#e39d2b] font-bold ml-1'>{price} BDT</small>
+                        </div>
+
                         <p className="py-6">{description}</p>
                         {
                             user ?

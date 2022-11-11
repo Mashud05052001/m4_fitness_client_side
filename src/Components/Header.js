@@ -20,6 +20,9 @@ const Header = () => {
         <li>
             <Link to='/reviews'>My Reviews</Link>
         </li>
+        <li>
+            <Link to='/blog'>Blog</Link>
+        </li>
         {
             !user &&
             <li>  <Link to='/login'>Login</Link></li>

@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import AddServices from "../Components/AddServices";
+import Blog from "../Components/Blog";
 import ErrorPage from "../Components/ErrorPage";
 import Home from "../Components/Home/Home";
 import Login from "../Components/Join User/Login";
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
         children: [
             { path: '/', element: <Home /> },
             { path: '/home', element: <Home /> },
+            { path: '/blog', element: <Blog /> },
             {
                 path: '/services', element: <Services />,
                 loader: () => fetch('http://localhost:5000/services'),
