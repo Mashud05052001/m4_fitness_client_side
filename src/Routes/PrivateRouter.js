@@ -6,7 +6,8 @@ const PrivateRouter = ({ children }) => {
     const location = useLocation();
     const { user, loading } = useContext(AuthContext);
     if (loading) {
-        return <div>Loading...</div>
+        return <div className='text-center mt-12'>  <button className=" btn loading  border-0 text-lg  bg-[#ffb946] hover:bg-[#feae2e]">loading</button>   </div>
+
     }
     if (user) {
         return children;
