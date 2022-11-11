@@ -9,8 +9,7 @@ const Reviews = () => {
     const { user } = useContext(AuthContext);
     const [reviews, setReviews] = useState([]);
     const [edit, setEdit] = useState(false);
-    const [updateId, setUpdateId] = useState(false);
-    console.log(edit);
+    const [review, setReview] = useState({});
     useEffect(() => {
         fetch(`http://localhost:5000/reviews?email=${user?.email}`)
             .then(res => res.json())
@@ -34,9 +33,9 @@ const Reviews = () => {
             });
         }
     }
-    const handleEdit = (id) => {
+    const handleEdit = (id, review) => {
         setEdit(true);
-        setUpdateId(id);
+        setReview(review);
     }
     return (
         <div className='relative'>
@@ -57,9 +56,9 @@ const Reviews = () => {
                         {/* <!-- row 1 --> */}
 
                         {
-                            reviews.map((user, index) => <tr key={index}>
+                            reviews.map((review, index) => <tr key={index}>
                                 <td >
-                                    <div onClick={() => handleDelete(user._id)}>
+                                    <div onClick={() => handleDelete(review._id)}>
                                         <MdDelete className='text-red-500 cursor-pointer duration-150 hover:text-red-600 w-6 h-6' />
                                     </div>
                                 </td>
@@ -68,25 +67,25 @@ const Reviews = () => {
                                     <div className="flex items-center space-x-3">
                                         <div className="avatar">
                                             <div className="mask mask-squircle w-12 h-12">
-                                                <img src={user.userInfo.image} alt='' />
+                                                <img src={review.userInfo.image} alt='' />
                                             </div>
                                         </div>
                                         <div>
-                                            <h3 className='text-xl font-semibold'>{user.userInfo.userName}</h3>
+                                            <h3 className='text-xl font-semibold'>{review.userInfo.userName}</h3>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <h4 className='font-medium'>{user.serviceReview.serviceName}</h4>
+                                    <h4 className='font-medium'>{review.serviceReview.serviceName}</h4>
                                 </td>
                                 <td>
-                                    <small className='flex text-lg items-center  text-[#e39d2b] font-semibold mt-1 mr-2'><AiFillStar className='mr-1  text-[#e39d2b]' /> {user.serviceReview.ratings}</small>
+                                    <small className='flex text-lg items-center  text-[#e39d2b] font-semibold mt-1 mr-2'><AiFillStar className='mr-1  text-[#e39d2b]' /> {review.serviceReview.ratings}</small>
                                 </td>
                                 <th>
-                                    <p className='text-md'>{user.serviceReview.review}</p>
+                                    <p className='text-md'>{review.serviceReview.review}</p>
                                 </th>
                                 <td >
-                                    <MdEdit className='text-orange-400 cursor-pointer duration-150 hover:text-orange-500 w-6 h-6' onClick={() => handleEdit(user?._id)}
+                                    <MdEdit className='text-orange-400 cursor-pointer duration-150 hover:text-orange-500 w-6 h-6' onClick={() => handleEdit(user?._id, review)}
 
                                     />
 
@@ -99,7 +98,7 @@ const Reviews = () => {
             </div>
             <div className={`absolute left-0 right-0 mx-auto top-0 w-96 z-10 bg-gray-200 rounded-lg
              ${edit ? 'z-10 opacity-100 duration-150' : '-z-10 duration-150 opacity-0'}`} >
-                <EditReviews setEdit={setEdit} id={updateId} />
+                <EditReviews setEdit={setEdit} item={review} />
             </div>
         </div>
     );
