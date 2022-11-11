@@ -8,6 +8,7 @@ import googleIcon from '../../Pictures/icons/loginregister/google.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
 import useTitle from '../Shared/useTitle';
+import jwt from '../Shared/jwt';
 
 const Login = () => {
     useTitle("Login");
@@ -25,6 +26,18 @@ const Login = () => {
         const password = form.password.value;
         login(email, password).then(result => {
             const user = result.user;
+            const currentUser = { email: user?.email }
+            jwt(currentUser);
+            // fetch('https://server-side-assignment.vercel.app/jwt', {
+            //     method: "POST",
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(currentUser)
+            // }).then(res => res.json()).then(data => {
+            //     // console.log("asd", data);
+            //     localStorage.setItem('token',data.token)
+            // })
             navigate(from, { replace: true });
             form.reset();
         }).catch(error => {
@@ -48,28 +61,37 @@ const Login = () => {
     const handleGoogle = () => {
         googleJoin().then(result => {
             console.log(result.user);
+            const user = result.user;
+            const currentUser = { email: user?.email }
+            jwt(currentUser);
             navigate(from, { replace: true });
         }).catch(error => console.log(error));
     }
     const handleFacebook = () => {
         facebookJoin().then(result => {
             console.log(result.user);
+            const user = result.user;
+            const currentUser = { email: user?.email }
+            jwt(currentUser);
             navigate(from, { replace: true });
         }).catch(error => console.log(error));
     }
     const handleGithub = () => {
         githubJoin().then(result => {
             console.log(result.user);
+            const user = result.user;
+            const currentUser = { email: user?.email }
+            jwt(currentUser);
             navigate(from, { replace: true });
         }).catch(error => console.log(error));
     }
 
     return (
-        <section className='max-w-screen-xl mx-auto grid grid-cols-2 mt-20 '>
-            <div className='w-96'>
-                <Lottie animationData={loginAnimation} loop={true} />;
+        <section className='max-w-screen-xl mb-20 mx-auto grid grid-cols-1 md:grid-cols-2 mt-20 '>
+            <div className='w-96 mx-auto md:mx-0'>
+                <Lottie animationData={loginAnimation} loop={true} />
             </div>
-            <div>
+            <div className='mx-auto md:mx-0'>
                 <form onSubmit={handleSubmit} className="border-2 border-[#ffb946]/80 border-b-0 border-r-0 card flex-shrink-0 w-full max-w-sm shadow-2xl rounded-bl-none rounded-tr-lg  bg-base-100 ">
                     <div className="card-body ">
                         <div className="form-control ">

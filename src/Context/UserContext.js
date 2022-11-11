@@ -36,11 +36,9 @@ const UserContext = ({ children }) => {
     const updateUser = (profile) => updateProfile(auth.currentUser, profile);
     const resetPassword = email => sendPasswordResetEmail(auth, email);
     const logOut = () => {
+        localStorage.removeItem('token');
         return signOut(auth);
     }
-
-
-
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
             setLoading(false);

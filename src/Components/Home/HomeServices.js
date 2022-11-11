@@ -5,7 +5,7 @@ import ShowServices from '../Shared/ShowServices';
 const HomeServices = () => {
     const [services, setServices] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/services?count=3')
+        fetch('https://server-side-assignment.vercel.app/services?count=3')
             .then(res => res.json())
             .then(data => setServices(data))
     }, []);

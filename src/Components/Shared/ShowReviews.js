@@ -3,7 +3,7 @@ import { AiFillStar } from 'react-icons/ai';
 const ShowReviews = ({ service }) => {
     const [users, setUsers] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews?serviceID=${service._id}`)
+        fetch(`https://server-side-assignment.vercel.app/reviews?serviceID=${service._id}`)
             .then(res => res.json())
             .then(data => setUsers(data))
     }, [])

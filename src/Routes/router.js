@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
             { path: '/blog', element: <Blog /> },
             {
                 path: '/services', element: <Services />,
-                loader: () => fetch('http://localhost:5000/services'),
+                loader: () => fetch('https://server-side-assignment.vercel.app/services'),
             },
             { path: '/reviews', element: <PrivateRouter><Reviews /></PrivateRouter> },
             { path: '/login', element: <Login /> },
@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
             { path: '/addServices', element: <PrivateRouter><AddServices /></PrivateRouter> },
             {
                 path: '/showSingleServices/:id', element: <ShowSingleServices />,
-                loader: ({ params }) => fetch(`http://localhost:5000/service/${params.id}`)
+                loader: ({ params }) => fetch(`https://server-side-assignment.vercel.app/service/${params.id}`)
             },
         ]
     }

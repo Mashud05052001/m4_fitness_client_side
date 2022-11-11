@@ -5,17 +5,20 @@ import { HiEye, HiEyeOff } from 'react-icons/hi';
 import fbIcon from '../../Pictures/icons/loginregister/facebook.png';
 import githubIcon from '../../Pictures/icons/loginregister/github.png';
 import googleIcon from '../../Pictures/icons/loginregister/google.png';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
 import useTitle from '../Shared/useTitle';
+import jwt from '../Shared/jwt';
 
 const Register = () => {
     useTitle("Register");
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
+    const navigate = useNavigate();
     const { updateUser, register, facebookJoin, googleJoin, githubJoin } = useContext(AuthContext);
     const handleSubmit = event => {
         event.preventDefault();
+        setError('');
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
@@ -23,13 +26,24 @@ const Register = () => {
         const photo = form.photourl.value;
         const confirmPassword = form.confirmPassword.value;
         // console.log(email, password, photo, confirmPassword, name);
+        // password validation and some condition check
+        if (password !== confirmPassword) { setError('Password Doesn\'t Matched'); return; }
+        if (password.length < 8 || password.length > 30) { setError('Password length must be 8-30 alphabet'); return; }
+        if (!/(?=.*?[A-Z])/.test(password)) { setError('Password must have 1 UpperCase Word'); return; }
+        if (!/(?=.*?[0-9])/.test(password)) { setError('Password must have 1 Digit'); return; }
+        if (!/(?=.*?[#?!@$%^&*-])/.test(password)) { setError('Password must have 1 spacial character'); return; }
+
+
+
         const profile = { displayName: name, photoURL: photo }
         register(email, password).then(result => {
             const user = result.user;
             console.log(user);
+            const currentUser = { email: user?.email }
+            jwt(currentUser);
             updateUser(profile).then(() => { }).catch(err => console.log(err));
             alert('You have successfully register our website');
-            <Navigate to='/' />
+            navigate('/');
             form.reset();
         }).catch(error => {
             if (error.message === "Firebase: Error (auth/user-not-found).") {
@@ -41,16 +55,28 @@ const Register = () => {
     const handleGoogle = () => {
         googleJoin().then(result => {
             console.log(result.user);
+            const user = result.user;
+            const currentUser = { email: user?.email }
+            jwt(currentUser);
+            navigate('/');
         }).catch(error => console.log(error));
     }
     const handleFacebook = () => {
         facebookJoin().then(result => {
             console.log(result.user);
+            const user = result.user;
+            const currentUser = { email: user?.email }
+            jwt(currentUser);
+            navigate('/');
         }).catch(error => console.log(error));
     }
     const handleGithub = () => {
         githubJoin().then(result => {
             console.log(result.user);
+            const user = result.user;
+            const currentUser = { email: user?.email }
+            jwt(currentUser);
+            navigate('/');
         }).catch(error => console.log(error));
     }
 

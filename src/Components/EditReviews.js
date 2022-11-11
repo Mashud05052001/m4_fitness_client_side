@@ -21,7 +21,7 @@ const EditReviews = ({ item, setEdit }) => {
                 serviceReview: serviceReview,
             }
             const serviceInfo = updatedReview?.serviceReview;
-            fetch(`http://localhost:5000/reviews/${_id}`, {
+            fetch(`https://server-side-assignment.vercel.app/reviews/${_id}`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'

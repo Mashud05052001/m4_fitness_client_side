@@ -20,19 +20,19 @@ To deploy this project run
 
 
 ### Github Client Side Private Repo
-- [GitHub Source Code](https://github.com/programming-hero-web-course1/b610-learning-platform-client-side-Mashud05052001)
+- [GitHub Source Code](https://github.com/Porgramming-Hero-web-course/b6a11-service-review-client-side-Mashud05052001)
 
 ### Github Server Side Private Repo
-- [GitHub Server Link](https://github.com/programming-hero-web-course1/b610-lerning-platform-server-side-Mashud05052001)
+- [GitHub Server Link](https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-Mashud05052001)
 
 ### Live Website Link
-- [Netlify Live Website](https://meta4-learning-website.netlify.app/)
+- [Netlify Live Website](https://assignment11-firebase.web.app/)
 
 ## Features
 
-- programming course related webside
-- Preview Counting
-- Giving some information obout our courses
+- My personal GYM trainig website
+- Giving some information obout my training
+- Student can share their review of my course
 
 ## Implements
 

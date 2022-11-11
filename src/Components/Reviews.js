@@ -5,16 +5,28 @@ import { MdDelete, MdEdit } from 'react-icons/md';
 import SheareUserReview from './Shared/SheareUserReview';
 import EditReviews from './EditReviews';
 import useTitle from './Shared/useTitle';
+import { Navigate } from 'react-router-dom';
 
 const Reviews = () => {
     useTitle(' User Reviews');
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     const [reviews, setReviews] = useState([]);
     const [edit, setEdit] = useState(false);
     const [review, setReview] = useState({});
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews?email=${user?.email}`)
-            .then(res => res.json())
+        fetch(`https://server-side-assignment.vercel.app/reviews?email=${user?.email}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    alert('You have to login first');
+                    <Navigate to='/login'></Navigate>
+                    return logOut();
+                }
+                return res.json()
+            })
             .then(data => setReviews(data))
     }, []);
     // console.log("previous", reviews);
@@ -25,7 +37,7 @@ const Reviews = () => {
         console.log(id);
         const confirm = window.confirm('Are you sure to delete this reviews?')
         if (confirm) {
-            fetch(`http://localhost:5000/reviews/${id}`, {
+            fetch(`https://server-side-assignment.vercel.app/reviews/${id}`, {
                 method: "DELETE",
             }).then(res => res.json()).then(data => {
                 if (data.acknowledged) {
@@ -39,64 +51,78 @@ const Reviews = () => {
         setEdit(true);
         setReview(review);
     }
+    // console.log(reviews.length);
     return (
         <div className='relative'>
-            <div className="overflow-x-auto max-w-screen-xl mx-auto my-10 ">
-                <table className="table w-full">
-                    {/* <!-- head --> */}
-                    <thead>
-                        <tr>
-                            <th>Delete</th>
-                            <th>User-Info</th>
-                            <th>Service-Info</th>
-                            <th>Ratings</th>
-                            <th>Reviews</th>
-                            <th>Edit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* <!-- row 1 --> */}
+            <div >
+                {
+                    (reviews.length > 0)
+                        ?
+                        <div className="overflow-x-auto max-w-screen-xl mx-auto my-10 ">
+                            <table className="table w-full">
+                                {/* <!-- head --> */}
+                                <thead>
+                                    <tr>
+                                        <th>Delete</th>
+                                        <th>User-Info</th>
+                                        <th>Service-Info</th>
+                                        <th>Ratings</th>
+                                        <th>Reviews</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {/* <!-- row 1 --> */}
 
-                        {
-                            reviews.map((review, index) => <tr key={index}>
-                                <td >
-                                    <div onClick={() => handleDelete(review._id)}>
-                                        <MdDelete className='text-red-500 cursor-pointer duration-150 hover:text-red-600 w-6 h-6' />
-                                    </div>
-                                </td>
+                                    {
+                                        reviews.map((review, index) => <tr key={index}>
+                                            <td >
+                                                <div onClick={() => handleDelete(review._id)}>
+                                                    <MdDelete className='text-red-500 cursor-pointer duration-150 hover:text-red-600 w-6 h-6' />
+                                                </div>
+                                            </td>
 
-                                <td>
-                                    <div className="flex items-center space-x-3">
-                                        <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
-                                                <img src={review.userInfo.image} alt='' />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h3 className='text-xl font-semibold'>{review.userInfo.userName}</h3>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h4 className='font-medium'>{review.serviceReview.serviceName}</h4>
-                                </td>
-                                <td>
-                                    <small className='flex text-lg items-center  text-[#e39d2b] font-semibold mt-1 mr-2'><AiFillStar className='mr-1  text-[#e39d2b]' /> {review.serviceReview.ratings}</small>
-                                </td>
-                                <th>
-                                    <p className='text-md'>{review.serviceReview.review}</p>
-                                </th>
-                                <td >
-                                    <MdEdit className='text-orange-400 cursor-pointer duration-150 hover:text-orange-500 w-6 h-6' onClick={() => handleEdit(user?._id, review)}
+                                            <td>
+                                                <div className="flex items-center space-x-3">
+                                                    <div className="avatar">
+                                                        <div className="mask mask-squircle w-12 h-12">
+                                                            <img src={review.userInfo.image} alt='' />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <h3 className='text-xl font-semibold'>{review.userInfo.userName}</h3>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h4 className='font-medium'>{review.serviceReview.serviceName}</h4>
+                                            </td>
+                                            <td>
+                                                <small className='flex text-lg items-center  text-[#e39d2b] font-semibold mt-1 mr-2'><AiFillStar className='mr-1  text-[#e39d2b]' /> {review.serviceReview.ratings}</small>
+                                            </td>
+                                            <th>
+                                                <p className='text-md'>{review.serviceReview.review}</p>
+                                            </th>
+                                            <td >
+                                                <MdEdit className='text-orange-400 cursor-pointer duration-150 hover:text-orange-500 w-6 h-6' onClick={() => handleEdit(user?._id, review)}
 
-                                    />
+                                                />
 
-                                </td>
-                            </tr>)
-                        }
-                    </tbody>
+                                            </td>
+                                        </tr>)
+                                    }
+                                </tbody>
 
-                </table>
+                            </table>
+
+
+                        </div>
+                        :
+                        <div>
+                            <h1 className='text-center mt-16 text-red-500 text-4xl font-bold '>You have No Reviews Yet</h1>
+                        </div>
+
+                }
             </div>
             <div className={`absolute left-0 right-0 mx-auto top-0 w-96 z-10 bg-gray-200 rounded-lg
              ${edit ? 'z-10 opacity-100 duration-150' : '-z-10 duration-150 opacity-0'}`} >
